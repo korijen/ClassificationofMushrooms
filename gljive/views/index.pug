@@ -1,0 +1,102 @@
+doctype html
+html
+  head
+    title Mushroom Identification
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+
+    block content
+    #titlediv
+      h1#title
+        a(href="/") Mushroom Identification
+    #inputdiv
+      h2#input Input your data below  
+      
+    #container
+      form(action="/process-shrooms" method="post")
+        .entry
+          label#dropdownlabel(for="cap-shape") Cap shape: 
+          .dropdown   
+            select(name="cap-shape", id="cap-shape")
+              option(value="b", selected= result[0] == "b") Bell
+              option(value="c", selected= result[0] == "c" ) Conical 
+              option(value="x", selected= result[0] == "x") Convex 
+              option(value="f", selected= result[0] == "f") Flat 
+              option(value="k", selected= result[0] == "k") Knobbed
+              option(value="s", selected= result[0] == "s") Sunken
+
+        .entry
+          label#dropdownlabel(for="cap-surface") Cap surface: 
+          .dropdown 
+            select(name="cap-surface", id="cap-surface")
+              option(value="f", selected= result[1] == "f") Fibrous
+              option(value="g", selected= result[1] == "g") Grooves
+              option(value="y", selected= result[1] == "y") Scaly 
+              option(value="s", selected= result[1] == "s") Smooth 
+          
+        .entry
+          label#dropdownlabel(for="cap-color") Cap color:
+          .dropdown 
+            select(name="cap-color", id="cap-color")
+              option(value="n", selected= result[2] == "n") Brown
+              option(value="b", selected= result[2] == "b") Buff
+              option(value="c", selected= result[2] == "c") Cinnamon 
+              option(value="g", selected= result[2] == "g") Gray 
+              option(value="r", selected= result[2] == "r") Green
+              option(value="p", selected= result[2] == "p") Pink
+              option(value="u", selected= result[2] == "u") Purple
+              option(value="e", selected= result[2] == "e") Red
+              option(value="w", selected= result[2] == "w") White
+              option(value="y", selected= result[2] == "y") Yellow
+
+        .entry
+          label#dropdownlabel(for="odor") Odor:
+          .dropdown 
+            select(name="odor", id="odor")
+              option(value="a", selected= result[3] == "a") Almond
+              option(value="l", selected= result[3] == "l") Anise
+              option(value="c", selected= result[3] == "c") Creosote 
+              option(value="y", selected= result[3] == "y") Fishy  
+              option(value="f", selected= result[3] == "f") Foul
+              option(value="m", selected= result[3] == "m") Musty 
+              option(value="n", selected= result[3] == "n") None
+              option(value="p", selected= result[3] == "p") Pungent 
+              option(value="s", selected= result[3] == "s") Spicy 
+
+        .entry
+          label#dropdownlabel(for="gill-spacing") Gill spacing:
+          .dropdown 
+            select(name="gill-spacing", id="gill-spacing")
+              option(value="c", selected= result[4] == "c") Close
+              option(value="w", selected= result[4] == "w") Crowded
+              option(value="d", selected= result[4] == "d") Distant 
+          
+
+        .entry
+          label#dropdownlabel(for="habitat") Habitat:
+          .dropdown 
+            select(name="habitat", id="habitat")
+              option(value="g", selected= result[5] == "g") Grasses
+              option(value="l", selected= result[5] == "l") Leaves
+              option(value="m", selected= result[5] == "m") Meadows 
+              option(value="p", selected= result[5] == "p") Paths  
+              option(value="u", selected= result[5] == "u") Urban
+              option(value="w", selected= result[5] == "w") Waste  
+              option(value="d", selected= result[5] == "d") Woods
+
+        input#pred(type="submit", value="Predict")
+        a#reset(href="/") Reset
+        
+        
+      
+    
+    #results
+      if results
+        if result[7] == "1"
+
+          h1 The mushroom is poisonous.
+        else 
+          h1 The mushroom is edible.
+
+      else 
+        h1 Your result will be shown here.
